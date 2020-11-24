@@ -123,8 +123,8 @@ class GD implements ProcessorInterface
 	/**
 	 * Collects information about the image.
 	 *
-	 * @param  string   $file Path to image file
-	 * @return resource
+	 * @param  string $file Path to image file
+	 * @return array
 	 */
 	protected function getImageInfo($file)
 	{
@@ -219,7 +219,7 @@ class GD implements ProcessorInterface
 	 */
 	public function restore(): void
 	{
-		if(is_resource($this->snapshot) === false || ($this->snapshot instanceof GdImage) === false)
+		if(is_resource($this->snapshot) === false || (class_exists(GdImage::class, false) && ($this->snapshot instanceof GdImage) === false))
 		{
 			throw new RuntimeException('No snapshot to restore.');
 		}
